@@ -11,12 +11,16 @@
             <order-date>2022-01-31</order-date>
             <type>Opłata</type>
             <description>OPŁATA ZA PROWADZENIE RACHUNKU</description>
-            <amount curr='PLN'>-7.90</amount><ending-balance curr='PLN'>+108867.16</ending-balance></operation>
+            <amount curr='PLN'>-7.90</amount>
+            <ending-balance curr='PLN'>+108867.16</ending-balance>
+        </operation>
         <operation>
             <exec-date>2022-01-31</exec-date>
             <order-date>2022-01-31</order-date>
             <type>Opłata</type>
             <description>OPŁATA PRZELEW ZEW.ZDEF</description>
-            <amount curr='PLN'>-1.20</amount><ending-balance curr='PLN'>+108875.06</ending-balance></operation>
+            <amount curr='PLN'>-1.20</amount>
+            <ending-balance curr='PLN'>+108875.06</ending-balance>
+        </operation>
     </operations>
 </account-history>
