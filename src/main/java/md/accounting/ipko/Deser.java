@@ -3,6 +3,7 @@ package md.accounting.ipko;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
+import lombok.SneakyThrows;
 import md.accounting.ipko.domain.AccountHistory;
 
 import java.io.File;
@@ -21,7 +22,8 @@ public final class Deser
         marshaller.marshal(accountHistory, new File(path));
     }
 
-    public AccountHistory deserialize(String path) throws Exception
+    @SneakyThrows
+    public AccountHistory deserialize(String path)
     {
         JAXBContext context = JAXBContext.newInstance(AccountHistory.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
