@@ -1,13 +1,14 @@
 package md.accounting.ipko;
 
 import md.accounting.ipko.domain.*;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 final class DeserTest
 {
@@ -54,10 +55,19 @@ final class DeserTest
                     build();
 
     @Test
-    @Disabled
-    void marshall_to_file() throws Exception
+    void serialize() throws Exception
     {
         Deser deser = new Deser();
         deser.serialize(HISTORY, "./target/account-history.xml");
+    }
+
+    @Test
+    void deserialize() throws Exception
+    {
+        Deser deser = new Deser();
+        AccountHistory accountHistory = deser.deserialize("./src/test/resources/account-history.xml");
+        assertThat(accountHistory).isNotNull();
+        List<Operation> operations = accountHistory.getOperations().getOperation();
+        assertThat(operations).hasSize(2);
     }
 }
