@@ -39,6 +39,6 @@ public class Operation
     @XmlElement(required = true)
     private Amount amount;
 
-    @XmlElement(required = true)
+    @XmlElement(name = "ending-balance", required = true)
     private EndingBalance endingBalance;
 }

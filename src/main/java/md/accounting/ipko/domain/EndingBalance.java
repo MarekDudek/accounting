@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
-@XmlRootElement(name = "ending-balance")
+@XmlRootElement
 @XmlAccessorType(FIELD)
 @Data
 @Builder
