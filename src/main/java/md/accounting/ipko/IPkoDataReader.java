@@ -22,13 +22,16 @@ import static java.util.Collections.reverse;
 import static java.util.stream.Collectors.toList;
 import static md.accounting.ipko.LocalDateDomain.LocalDates;
 
-public enum DataExtractor
+public enum IPkoDataReader
 {
     ;
 
     private static final Deser DESER = new Deser();
 
-    public static List<AccountHistory> read(Path directory) throws IOException
+    public static List<AccountHistory> read
+            (
+                    Path directory
+            ) throws IOException
     {
         Stream<Path> fs = Files.list(directory).sorted();
         return fs.map(f ->
@@ -37,7 +40,10 @@ public enum DataExtractor
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    public static RangeSet<LocalDate> ranges(List<AccountHistory> histories)
+    public static RangeSet<LocalDate> ranges
+            (
+                    List<AccountHistory> histories
+            )
     {
         Stream<Date> ds =
                 histories.stream().map(h ->
@@ -65,12 +71,18 @@ public enum DataExtractor
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    public static boolean isValid(RangeSet<LocalDate> set)
+    public static boolean isValid
+            (
+                    RangeSet<LocalDate> set
+            )
     {
         return set.asRanges().size() == 1;
     }
 
-    public static List<Operation> extract(List<AccountHistory> histories)
+    public static List<Operation> extract
+            (
+                    List<AccountHistory> histories
+            )
     {
         return histories.stream().flatMap(h -> {
                     List<Operation> ops = h.getOperations().getOperation();
@@ -80,7 +92,10 @@ public enum DataExtractor
         ).collect(toList());
     }
 
-    public static List<Triplet<Operation, Operation, BigDecimal>> differences(List<Operation> operations)
+    public static List<Triplet<Operation, Operation, BigDecimal>> differences
+            (
+                    List<Operation> operations
+            )
     {
         return Streams.zip(
                 operations.stream(),
@@ -94,14 +109,20 @@ public enum DataExtractor
         ).collect(toList());
     }
 
-    public static List<Triplet<Operation, Operation, BigDecimal>> inconsistencies(List<Triplet<Operation, Operation, BigDecimal>> differences)
+    public static List<Triplet<Operation, Operation, BigDecimal>> inconsistencies
+            (
+                    List<Triplet<Operation, Operation, BigDecimal>> differences
+            )
     {
         return differences.stream().filter(d ->
                 d.getValue2().compareTo(ZERO) != 0
         ).collect(toList());
     }
 
-    public static boolean noInconsistencies(List<Triplet<Operation, Operation, BigDecimal>> inconsistencies)
+    public static boolean noInconsistencies
+            (
+                    List<Triplet<Operation, Operation, BigDecimal>> inconsistencies
+            )
     {
         return inconsistencies.isEmpty();
     }
