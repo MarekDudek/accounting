@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static java.lang.String.format;
-import static java.util.stream.Collectors.toList;
 
 @Slf4j
 public enum IPkoDataConverter
@@ -53,11 +52,8 @@ public enum IPkoDataConverter
             throw new IllegalArgumentException(format("There are inconsistencies: %s", inconsistencies));
         }
 
-        List<String> inserts =
-                operations.stream().map(
-                        PostgreSqlInsertsWriter::createInsert
-                ).collect(toList());
+        String insert = PostgreSqlInsertsWriter.createInsert(operations);
 
-        Files.write(output, inserts);
+        Files.write(output, insert.getBytes());
     }
 }
